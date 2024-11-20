@@ -73,7 +73,11 @@ const getUserService = async (params, res) => {
   const { id, name, email, age } = params;
 
   try {
-    const userData = await User.findById(id).select({ name: 1, email: 1, age: 1 });
+    const userData = await User.findById(id).select({
+      name: 1,
+      email: 1,
+      age: 1,
+    });
     if (!userData) {
       return res.status(404).json({
         statusCode: 404,
@@ -96,7 +100,6 @@ const getUserService = async (params, res) => {
 };
 
 const listUserService = async (params, res) => {
-
   try {
     const userData = await User.find().select({ name: 1, email: 1, age: 1 });
     if (!userData) {
@@ -106,8 +109,15 @@ const listUserService = async (params, res) => {
         data: {},
       });
     }
-    let userDataWithSl = userData.map((data, index) => {
-      return { slNo: index + 1, ...data };
+    const userDataWithSl = userData.map((data, index) => {
+      const { _id, name, email, age } = data;
+      return {
+        slNo: index + 1,
+        _id,
+        name,
+        email,
+        age,
+      };
     });
 
     return res.status(200).json({
@@ -167,5 +177,5 @@ export default {
   deleteUserService,
   getUserService,
   updateUserService,
-  listUserService
+  listUserService,
 };
