@@ -9,5 +9,6 @@ router.post("/add-user", validators.userValidator, userController.addUser);
 router.delete("/delete-user/:id", verifyToken,userController.deleteUser);
 router.put("/update-user/:id",verifyToken, validators.userCheckValidator,userController.updateUser);
 router.get("/get-user/:id", verifyToken,userController.getUser);
+router.get("/list-user", verifyToken,userController.listUser);
 
 export default router;

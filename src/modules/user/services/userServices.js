@@ -95,6 +95,31 @@ const getUserService = async (params, res) => {
   }
 };
 
+const listUserService = async (params, res) => {
+
+  try {
+    const userData = await User.find(id).select({ name: 1, email: 1, age: 1 });
+    if (!userData) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: "User doesn't exists!",
+        data: {},
+      });
+    }
+
+    return res.status(200).json({
+      statusCode: 200,
+      message: "User list fetched successfully",
+      data: userData,
+    });
+  } catch (err) {
+    console.error("Error fetching user list:", err);
+    return res
+      .status(500)
+      .json({ statusCode: 500, message: "Internal server error" });
+  }
+};
+
 const updateUserService = async (params, body, res) => {
   const { id } = params;
 
@@ -139,4 +164,5 @@ export default {
   deleteUserService,
   getUserService,
   updateUserService,
+  listUserService
 };

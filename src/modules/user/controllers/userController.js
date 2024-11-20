@@ -39,5 +39,13 @@ const getUser = async (req, res) => {
     console.log("error", error);
   }
 };
+const listUser = async (req, res) => {
+  try {
+    const listUserResponse = await userServices.listUserService(req.params, res);
+    return listUserResponse;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
-export default { addUser, deleteUser, updateUser, getUser };
+export default { addUser, deleteUser, updateUser, getUser,listUser };
