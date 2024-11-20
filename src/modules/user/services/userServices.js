@@ -98,7 +98,7 @@ const getUserService = async (params, res) => {
 const listUserService = async (params, res) => {
 
   try {
-    const userData = await User.find(id).select({ name: 1, email: 1, age: 1 });
+    const userData = await User.find().select({ name: 1, email: 1, age: 1 });
     if (!userData) {
       return res.status(404).json({
         statusCode: 404,
