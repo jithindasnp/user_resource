@@ -106,11 +106,14 @@ const listUserService = async (params, res) => {
         data: {},
       });
     }
+    let userDataWithSl = userData.map((data, index) => {
+      return { slNo: index + 1, ...data };
+    });
 
     return res.status(200).json({
       statusCode: 200,
       message: "User list fetched successfully",
-      data: userData,
+      data: userDataWithSl,
     });
   } catch (err) {
     console.error("Error fetching user list:", err);
